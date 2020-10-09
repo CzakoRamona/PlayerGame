@@ -30,25 +30,33 @@ class Player {
         //     }
         // })
         window.addEventListener("keydown", (e) => {
-
+            let playerDom = this.gameContainer.children[0];
+            let x = parseInt(playerDom.style.left);
+            let y = parseInt(playerDom.style.top);
+            let modifier = 20;
             switch (e.key) {
 
                 case "ArrowUp":
                     console.log("move up")
+                    y = y - modifier;
                     break
                 case "ArrowDown":
                     console.log("move down");
+                    y = y + modifier;
                     break
                 case "ArrowLeft":
                     console.log("move left")
+                    x = x - modifier;
                     break
                 case "ArrowRight":
                     console.log("move right")
+                    x = x + modifier;
                     break
             }
-            this.checkIfPlayerIsOutsideOfContainer()
-            this.movePlayerHtml(e.key)
-            this.checkIfPlayerIsOutsideOfContainer();
+
+            if (this.checkIfPlayerIsOutsideOfContainer(x, y) === true) {
+                this.movePlayerHtml(e.key)
+            }
         })
 
     }
@@ -71,18 +79,23 @@ class Player {
             }
         }
         // returneaza true sau false
-    checkIfPlayerIsOutsideOfContainer() {
-        let playerDom = this.gameContainer.children[0];
-        if (parseInt(playerDom.style.left) >= 0 && parseInt(playerDom.style.left) <= 400 && parseInt(playerDom.style.top) >= 0 && parseInt(playerDom.style.top) <= 400) {
-            console.log(true + " player is in")
-        } else {
-            console.log(false + " player is out")
-        }
-    }
+        // checkIfPlayerIsOutsideOfContainer() {
+        //     let playerDom = this.gameContainer.children[0];
+        //     if (parseInt(playerDom.style.left) >= 0 && parseInt(playerDom.style.left) <= 400 && parseInt(playerDom.style.top) >= 0 && parseInt(playerDom.style.top) <= 400) {
+        //         console.log(true + " player is in")
+        //     } else {
+        //         console.log(false + " player is out")
+        //     }
+        // }
 
+    checkIfPlayerIsOutsideOfContainer(x, y) {
+        // if (x >= 0 && x <= 400 && y >= 0 && y <= 400) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
 
-    playerIsOutsideOfContainer() {
-        let playerDom = this.gameContainer.children[0];
+        return x >= 0 && x <= 400 && y >= 0 && y <= 400
 
     }
 
